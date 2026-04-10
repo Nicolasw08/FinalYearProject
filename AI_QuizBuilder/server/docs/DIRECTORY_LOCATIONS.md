@@ -1,0 +1,55 @@
+# Correct Directory Locations
+
+```text
+AI_QuizBuilder/
+  server/
+    app.js
+    jest.config.js
+    package.json
+    docs/
+      IMPLEMENTATION_UPDATE.md
+      SERVICES_AND_TESTS_PLAN.md
+      DIRECTORY_LOCATIONS.md
+    src/
+      appFactory.js
+      config/
+        buildDependencies.js
+        connectDB.js
+      domain/
+        entities/
+          UserEntity.js
+        errors/
+          AppError.js
+        repositories/
+          UserRepository.js
+      use-cases/
+        RegisterUser.js
+        LoginUser.js
+      adapters/
+        repositories/
+          MongoUserRepository.js
+      infrastructure/
+        persistence/
+          UserModel.js
+        security/
+          PasswordHasher.js
+          TokenService.js
+          authMiddleware.js
+        web/
+          controllers/
+            authController.js
+          routes/
+            authRoutes.js
+    tests/
+      helpers/
+        FakePasswordHasher.js
+        FakeTokenService.js
+        InMemoryUserRepository.js
+      unit/
+        RegisterUser.test.js
+        LoginUser.test.js
+        authController.test.js
+        authMiddleware.test.js
+      integration/
+        authRoutes.test.js
+```

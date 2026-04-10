@@ -1,29 +1,22 @@
-require('dotenv').config(); // This loads your .env variables
-const express = require('express');
-const connectDB = require('./config/db');
-
-const app = express();
-
-// Connect to Database
-connectDB();
-
-// Middleware to read JSON data from requests
-app.use(express.json());
-
-// Basic test route
-app.get('/', (req, res) => {
-  res.send('AI Quiz Builder API is running...');
-});
+require('dotenv').config();
+const connectDB = require('./src/config/connectDB');
+const createApp = require('./src/appFactory');
 
 const PORT = process.env.PORT || 5000;
+const { app } = createApp();
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+async function start() {
+  await connectDB(process.env.MONGO_URI);
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
-const cors = require('cors');
-app.use(cors()); // Add this before your routes
+if (require.main === module) {
+  start().catch((error) => {
+    console.error('Failed to start server', error);
+    process.exit(1);
+  });
+}
 
-const authRoutes = require('./routes/authRoutes');
-app.use('/api/auth', authRoutes);
-
+module.exports = { start };
